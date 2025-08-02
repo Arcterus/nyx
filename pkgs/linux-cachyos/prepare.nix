@@ -191,6 +191,7 @@ let
         "-d LTO_CLANG_FULL"
         "-e LTO_CLANG_THIN"
         "-e HAVE_GCC_PLUGINS"
+        "-e X86_NATIVE_CPU"
       ]
     else if cachyConfig.useLTO == "full" then
       [
@@ -252,6 +253,11 @@ let
         "-d PREEMPT_VOLUNTARY"
         "-d PREEMPT"
         "-d PREEMPTION"
+        "-d PREEMPT_DYNAMIC"
+      ]
+    else if cachyConfig.preempt == "rt" then
+      [
+        "-e PREEMPT_RT"
         "-d PREEMPT_DYNAMIC"
       ]
     else

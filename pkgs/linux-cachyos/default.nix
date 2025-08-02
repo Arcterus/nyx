@@ -94,6 +94,38 @@ in
       };
   };
 
+  cachyos-rt = mkCachyKernel {
+    taste = "linux-cachyos";
+    configPath = ./config-nix/cachyos-lto.x86_64-linux.nix;
+
+    stdenv = stdenvLLVM;
+    useLTO = "thin";
+    preempt = "rt";
+
+    description = "Linux EEVDF-BORE scheduler Kernel by CachyOS built with LLVM and Thin LTO";
+
+    packagesExtend =
+      kernel: _finalModules: prev:
+      (builtins.mapAttrs (
+        k: v:
+        if
+          builtins.elem k [
+            "zenpower"
+            "v4l2loopback"
+            "zfs_cachyos"
+            "virtualbox"
+            "xone"
+          ]
+        then
+          llvmModuleOverlay kernel v
+        else
+          v
+      ) prev)
+      // {
+        recurseForDerivations = false;
+      };
+  };
+
   cachyos-sched-ext = throw "\"sched-ext\" patches were merged with \"cachyos\" flavor.";
 
   cachyos-server = mkCachyKernel {
