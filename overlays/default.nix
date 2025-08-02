@@ -206,12 +206,14 @@ in
   linux_cachyos-rc = cachyosPackages.cachyos-rc.kernel;
   linux_cachyos-server = drvDropUpdateScript cachyosPackages.cachyos-server.kernel;
   linux_cachyos-lto = cachyosPackages.cachyos-lto.kernel;
+  linux_cachyos-rt = cachyosPackages.cachyos-rt.kernel;
 
   linuxPackages_cachyos = cachyosPackages.cachyos;
   linuxPackages_cachyos-hardened = cachyosPackages.cachyos-hardened;
   linuxPackages_cachyos-lto = cachyosPackages.cachyos-lto;
   linuxPackages_cachyos-rc = cachyosPackages.cachyos-rc;
   linuxPackages_cachyos-server = cachyosPackages.cachyos-server;
+  linuxPackages_cachyos-rt = cachyosPackages.cachyos-rt;
 
   luxtorpeda = final.callPackage ../pkgs/luxtorpeda {
     luxtorpedaVersion = importJSON ../pkgs/luxtorpeda/version.json;
